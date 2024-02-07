@@ -3,12 +3,18 @@ import { Layout, Button, Drawer } from "antd";
 import RightMenu from "./RightMenu";
 import { MenuOutlined } from "@ant-design/icons";
 import { useLocation } from "react-router-dom";
+import { isAuthenticated } from "../utils";
 
 const Navbar: React.FC = () => {
     const [visible, setVisible] = useState(false);
+    const [user, setUser] = useState(null);
     const showDrawer = () => {
         setVisible(!visible);
     };
+
+    if (isAuthenticated()) {
+
+    }
 
     let { pathname: location } = useLocation();
     useEffect(() => {

@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useGetAllOrdersQuery } from '../services/usersApi';
 import { Alert, Col, Divider, Row } from 'antd';
 import Title from 'antd/es/typography/Title';
 import { Loader } from '../components';
-import { Book } from '../models';
 import BookCard from '../components/Cards/BookCard';
+import { useNavigate } from 'react-router-dom';
+import { isAuthenticated } from '../utils';
 
 const GetMyOrders: React.FC = () => {
-    const { data: books, isFetching, isError } = useGetAllOrdersQuery(1)
-    console.log(books)
+    const navigate = useNavigate();
+    const [mounted, setMounted] = useState(true);
+
+    const { data: books, isFetching, isError } = useGetAllOrdersQuery(1);
+
+    useEffect(() => {
+        if (!isAuthenticated() && mounted) {
+            navigate('/login');
+            setMounted(false);
+        }
+    }, [navigate, mounted]);
+
     if (isFetching) {
         return <Loader />;
     }
@@ -17,15 +28,9 @@ const GetMyOrders: React.FC = () => {
         return <Alert message="Error loading books" type="error" />;
     }
 
-    for (let i = 0; i < books.length; i++) {
-        console.log(books[i].Book.title)
-    }
-
-
 
     return (
         <>
-
             <Divider orientation="left">
                 <Title>My Orders</Title>
             </Divider>

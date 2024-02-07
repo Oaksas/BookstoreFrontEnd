@@ -1,6 +1,6 @@
 import { Menu, Avatar } from "antd";
 import { UserOutlined, CodeOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { isAuthenticated } from "../utils";
 
@@ -9,12 +9,12 @@ interface RightMenuProps {
 }
 
 const RightMenu: React.FC<RightMenuProps> = ({ mode }) => {
-  const [isLoggedIn, setLoggedIn] = useState(isAuthenticated());
+  const navigate = useNavigate();
+  const [user, setUser] = useState({ username: '', points: 0 });
 
   const handleLogout = () => {
-    // Replace this with your actual logout logic
-    localStorage.removeItem('token');
-    setLoggedIn(false);
+    localStorage.removeItem('TOKEN');
+    navigate('/login');
   };
 
   return (
@@ -33,7 +33,7 @@ const RightMenu: React.FC<RightMenuProps> = ({ mode }) => {
         <Menu.Item key="myorders">
           <UserOutlined />  <Link to="/myOrders">My Orders</Link>
         </Menu.Item>
-        <Menu.Item key="log-out">
+        <Menu.Item key="log-out" onClick={handleLogout}>
           <LogoutOutlined /> Logout
         </Menu.Item>
       </Menu.SubMenu>
