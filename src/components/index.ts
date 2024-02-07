@@ -1,3 +1,3 @@
 import Navbar from "./Navbar";
-
-export { Navbar }
+import AllBooks from "./AllBooks";
+export { Navbar, AllBooks }

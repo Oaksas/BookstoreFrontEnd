@@ -12,15 +12,15 @@ const RightMenu: React.FC<RightMenuProps> = ({ mode }) => {
         title={
           <>
             <Avatar icon={<UserOutlined />} />
-            <span className="username">John Doe</span>
+            <span className="username">John</span>
           </>
         }
       >
         <Menu.Item key="project">
-          <CodeOutlined /> Projects
+          <CodeOutlined /> ALL BOOKS
         </Menu.Item>
         <Menu.Item key="about-us">
-          <UserOutlined /> Profile
+          <UserOutlined /> MY ORDERS
         </Menu.Item>
         <Menu.Item key="log-out">
           <LogoutOutlined /> Logout

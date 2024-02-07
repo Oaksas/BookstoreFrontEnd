@@ -64,6 +64,16 @@
   margin-right: 10px;
 }
 
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 10px;
+  background-color: black;
+
+}
+
 .ant-drawer-body {
   padding: 0;
 }
@@ -110,5 +120,6 @@
     display: inline-block;
   }
 }
+
 
 /* Navbar End */

@@ -1,10 +1,12 @@
 import React from 'react';
-import { Navbar } from '../components';
+import { AllBooks } from '../components';
 
 const Home: React.FC = () => {
     return (
         <>
-            <Navbar />
+            <AllBooks />
+
+
         </>
     );
 };
