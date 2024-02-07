@@ -41,6 +41,11 @@ export const userAPI = createApi({
                 body: loginData,
             }),
         }),
+
+        getAllOrders: builder.query<any, number>({
+            query: (id) => `users/${id}/orders`,
+        }),
+
     }),
 });
 
@@ -50,4 +55,5 @@ export const {
     useUpdateUserMutation,
     useDeleteUserMutation,
     useLoginUserMutation,
+    useGetAllOrdersQuery,
 } = userAPI;
