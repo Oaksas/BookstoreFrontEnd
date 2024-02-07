@@ -1,15 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import { Button } from 'antd';
+import { Home } from './features';
 
 function App() {
 
   return (
     <>
       <Button type="primary">Button</Button>
-
+      <Home />
     </>
   )
 }
