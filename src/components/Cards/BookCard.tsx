@@ -18,7 +18,7 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
                     className='cards'
                     hoverable
                     title={'$' + book.price}
-                    cover={<img alt={book.title} src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                    cover={<img alt={book.title} src="https://images-na.ssl-images-amazon.com/images/I/51Ga5GuElyL._AC_SX184_.jpg" />}
                 >
 
                     <Meta title={book.title} description={book.author} />
