@@ -22,7 +22,9 @@ const AllBooks: React.FC = () => {
         return <Alert message="No books found" type="info" />;
     }
     const filteredBooks = allBooks.filter((book: Book) =>
-        book.title.toLowerCase().includes(filter.toLowerCase())
+        book.title.toLowerCase().includes(filter.toLowerCase()) ||
+        book.author.toLowerCase().includes(filter.toLowerCase())
+
     );
 
     return (
@@ -31,7 +33,7 @@ const AllBooks: React.FC = () => {
                 <Title>All Books</Title>
             </Divider>
             <Input
-                placeholder="Filter by Title"
+                placeholder="Filter by title or author"
                 value={filter}
                 onChange={(e) => setFilter(e.target.value)}
                 style={{ margin: '16px', width: '300px' }}
