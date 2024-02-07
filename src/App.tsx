@@ -7,7 +7,6 @@ function App() {
 
   return (
     <>
-      <Button type="primary">Button</Button>
       <Home />
     </>
   )

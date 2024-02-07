@@ -17,11 +17,10 @@ const Navbar: React.FC = () => {
 
     return (
         <nav className="navbar">
-            Navvv
             <Layout>
                 <Layout.Header className="nav-header">
                     <div className="logo">
-                        <h3 className="brand-font">Brand Here</h3>
+                        <h3 className="brand-font">BOOKSTORE</h3>
                     </div>
                     <div className="navbar-menu">
                         <Button className="menuButton" type="text" onClick={showDrawer}>

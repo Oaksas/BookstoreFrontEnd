@@ -4,7 +4,6 @@ import { Navbar } from '../components';
 const Home: React.FC = () => {
     return (
         <>
-            ffff
             <Navbar />
         </>
     );
