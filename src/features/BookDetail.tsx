@@ -71,12 +71,13 @@ const BookDetail: React.FC = () => {
                                         {book.tags.map((tag, index) => (
                                             <span key={index}>{tag}{index !== book.tags.length - 1 && ', '}</span>
                                         ))}
-                                        <Rating
-                                            style={{ maxWidth: 180 }}
-                                            value={book.rating}
-                                            readOnly
-                                        />
+
                                     </Typography.Paragraph>
+                                    {book.rating}   <Rating
+                                        style={{ maxWidth: 180 }}
+                                        value={book.rating}
+                                        readOnly
+                                    />
 
                                 </Typography.Title>
                                 <Typography.Title level={4}>{book.author}</Typography.Title>
