@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, Card } from 'antd';
+import { Card } from 'antd';
 import { Book } from '../../models';
 import { Link } from 'react-router-dom';
 

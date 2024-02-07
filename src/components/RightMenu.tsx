@@ -1,7 +1,7 @@
 import { Menu, Avatar } from "antd";
-import { UserOutlined, CodeOutlined, LogoutOutlined } from "@ant-design/icons";
+import { UserOutlined, CodeOutlined, LogoutOutlined, DollarOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { isAuthenticated } from "../utils";
 
 interface RightMenuProps {
@@ -10,11 +10,25 @@ interface RightMenuProps {
 
 const RightMenu: React.FC<RightMenuProps> = ({ mode }) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({ username: '', points: 0 });
+  const [user, setUser] = useState({ username: "", points: 0 });
+
+  useEffect(() => {
+    const fetchUser = () => {
+      if (isAuthenticated()) {
+        const userString = localStorage.getItem("TOKEN");
+        if (userString) {
+          const parsedUser = JSON.parse(userString);
+          setUser(parsedUser);
+        }
+      }
+    };
+
+    fetchUser();
+  }, []); // Empty dependency array ensures useEffect runs only once on mount
 
   const handleLogout = () => {
-    localStorage.removeItem('TOKEN');
-    navigate('/login');
+    localStorage.removeItem("TOKEN");
+    navigate("/login");
   };
 
   return (
@@ -23,7 +37,8 @@ const RightMenu: React.FC<RightMenuProps> = ({ mode }) => {
         title={
           <>
             <Avatar icon={<UserOutlined />} />
-            <span className="username">John</span>
+            <span className="username">{user && user.points} Points</span>
+            <span className="username">{user && user.username}</span>
           </>
         }
       >
@@ -31,11 +46,21 @@ const RightMenu: React.FC<RightMenuProps> = ({ mode }) => {
           <CodeOutlined /> <Link to="/">All Books</Link>
         </Menu.Item>
         <Menu.Item key="myorders">
-          <UserOutlined />  <Link to="/myOrders">My Orders</Link>
+          <UserOutlined /> <Link to="/myOrders">My Orders</Link>
         </Menu.Item>
         <Menu.Item key="log-out" onClick={handleLogout}>
           <LogoutOutlined /> Logout
         </Menu.Item>
+
+        <Menu.Item key="points" >
+          < DollarOutlined /> {user && user.points} Points
+
+        </Menu.Item>
+        <Menu.Item key="username" >
+          <UserOutlined /> {user && user.username}
+
+        </Menu.Item>
+
       </Menu.SubMenu>
     </Menu>
   );

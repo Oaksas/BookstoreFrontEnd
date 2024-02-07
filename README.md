@@ -52,6 +52,7 @@ Visit [http://localhost:5173](http://localhost:5173) in your browser.
 - Get All Orders of logged in User
 - Buy Book
 - Validations
+- Responsive
 ...
 
 ## Technologies Used

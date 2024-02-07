@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Divider, Layout, Row, Alert } from 'antd';
+import { Col, Divider, Row, Alert } from 'antd';
 import Title from 'antd/es/typography/Title';
 import BookCard from './Cards/BookCard';
 import { useGetAllBooksQuery } from '../services/bookStoreApi';
@@ -8,7 +8,6 @@ import { Loader } from '.';
 
 const AllBooks: React.FC = () => {
     const { data: allBooks, isFetching, isError } = useGetAllBooksQuery();
-    console.log(allBooks);
 
     if (isFetching) {
         return <Loader />;
