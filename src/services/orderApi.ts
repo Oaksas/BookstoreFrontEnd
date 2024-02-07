@@ -1,5 +1,6 @@
-// ordersAPI.ts
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+type UserTag = { type: 'User'; id: number };
 
 export const ordersAPI = createApi({
     reducerPath: 'ordersAPI',
@@ -11,6 +12,7 @@ export const ordersAPI = createApi({
                 method: 'POST',
                 body: newOrder,
             }),
+
         }),
     }),
 });

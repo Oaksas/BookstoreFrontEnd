@@ -7,7 +7,7 @@ import { useCreateOrderMutation } from '../services/orderApi';
 import toast from 'react-simple-toasts';
 import { toastConfig } from 'react-simple-toasts';
 import 'react-simple-toasts/dist/theme/dark.css';
-import { isAuthenticated } from '../utils';
+import { getMeUser, isAuthenticated } from '../utils';
 import { Rating } from '@smastrom/react-rating'
 
 import '@smastrom/react-rating/style.css'
@@ -38,18 +38,26 @@ const BookDetail: React.FC = () => {
 
     const handleBuy = async () => {
         try {
-            const result = await createOrder({
-                bookId: 1,
-                customerId: 1,
-                quantity: 1,
-            });
+            const user = getMeUser()
+            if (user) {
+                const { id } = user
+                if (book) {
+                    const result = await createOrder({
+                        bookId: book.id!,
+                        customerId: id,
+                        quantity: 1,
+                    });
+                    console.log(user, result)
 
-            if ('error' in result) {
-                toast('Order Failed..check your balance and try again');
-                return;
-            } else {
-                toast('Order Placed Successfully');
+                    if (result.error) {
+                        toast('Order Failed..check your balance and try again');
+                        return;
+                    } else {
+                        toast('Order Placed Successfully');
+                    }
+                }
             }
+
         } catch (error) {
             toast('Order Failed..check your balance and try again');
         }
@@ -94,4 +102,4 @@ const BookDetail: React.FC = () => {
     );
 };
 
-export default BookDetail;
+export default React.memo(BookDetail);

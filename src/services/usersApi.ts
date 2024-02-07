@@ -1,5 +1,3 @@
-// userAPI.ts
-
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { User } from "../models";
 
@@ -41,6 +39,7 @@ export const userAPI = createApi({
                 body: loginData,
             }),
         }),
+
 
         getAllOrders: builder.query<any, number>({
             query: (id) => `users/${id}/orders`,

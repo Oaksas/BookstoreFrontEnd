@@ -1,19 +1,20 @@
 import React from 'react';
-import { useLoginUserMutation } from '../services/usersApi';
+import { useCreateUserMutation } from '../services/usersApi';
 import toast from 'react-simple-toasts';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const UserLogin: React.FC = () => {
-    const [loginUser] = useLoginUserMutation();
+const UserSignup: React.FC = () => {
+    const [signupUser] = useCreateUserMutation();
     const navigate = useNavigate(); // Step 1
 
-    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const username = e.currentTarget.username.value;
         const password = e.currentTarget.password.value;
 
         try {
-            const result = await loginUser({ username, password });
+            const result = await signupUser({ username, password });
+
             if ('error' in result) {
                 toast(result.error.data);
                 return;
@@ -26,15 +27,14 @@ const UserLogin: React.FC = () => {
                 return;
             }
 
-            localStorage.setItem('TOKEN', JSON.stringify({ username, points: data.points, id: data.id }));
-            toast('Login Successful');
+            toast('Signup Successful');
 
 
-            navigate('/'); // Step 3
+            navigate('/login'); // Step 3
 
         } catch (error) {
-            toast('Login Failed');
-            console.error('Login failed:', error);
+            toast('Signup Failed');
+            console.error('Signup failed:', error);
         }
     };
 
@@ -43,9 +43,9 @@ const UserLogin: React.FC = () => {
         <div className="container-login">
             <div className="wrapper">
                 <div className="title">
-                    <span>Login </span>
+                    <span>Signup </span>
                 </div>
-                <form onSubmit={handleLogin}>
+                <form onSubmit={handleSignup}>
                     <div className="row">
                         <i className="fas fa-user"></i>
                         <input type="text" placeholder="Username" required name="username" />
@@ -55,18 +55,12 @@ const UserLogin: React.FC = () => {
                         <input type="password" placeholder="Password" required name="password" />
                     </div>
                     <div className="row button">
-                        <input type="submit" value="Login" />
+                        <input type="submit" value="Signup" />
                     </div>
-
-                    <div className='row'>
-                        Don't have an account ? <Link to='/signup'>Signup</Link>
-
-                    </div>
-
                 </form>
             </div>
         </div>
     );
 };
 
-export default UserLogin;
+export default UserSignup;

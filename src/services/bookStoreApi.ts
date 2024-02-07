@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Book } from "../models";
 
-// Placeholder types for query and mutation return values
 type QueryReturnValue<T> = { data: T };
 type MutationReturnValue<T> = { data: T };
 
