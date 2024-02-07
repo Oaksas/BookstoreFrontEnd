@@ -2,7 +2,9 @@ import React from 'react';
 import { Card } from 'antd';
 import { Book } from '../../models';
 import { Link } from 'react-router-dom';
-import Rating from 'react-rating';
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
+
 
 const { Meta } = Card;
 
@@ -28,7 +30,15 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
 
                             </>
                         }
+
                     />
+                    <div>
+                        {book.rating}   <Rating
+                            style={{ maxWidth: 100 }}
+                            value={book.rating}
+                            readOnly
+                        />
+                    </div>
                 </Card>
             </Link>
         </div>

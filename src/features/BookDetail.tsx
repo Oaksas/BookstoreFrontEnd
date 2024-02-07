@@ -6,12 +6,13 @@ import { Loader } from '../components';
 import { useCreateOrderMutation } from '../services/orderApi';
 import toast from 'react-simple-toasts';
 import { toastConfig } from 'react-simple-toasts';
-import 'react-simple-toasts/dist/theme/dark.css'; // choose your theme
+import 'react-simple-toasts/dist/theme/dark.css';
 import { isAuthenticated } from '../utils';
 import { Rating } from '@smastrom/react-rating'
 
 import '@smastrom/react-rating/style.css'
-toastConfig({ theme: 'dark' }); // configure global toast settings, like theme
+
+toastConfig({ theme: 'dark' });
 
 const { Content } = Layout;
 
