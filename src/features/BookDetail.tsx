@@ -41,7 +41,7 @@ const BookDetail: React.FC = () => {
                 quantity: 1,
             });
 
-            if (result?.error) {
+            if ('error' in result) {
                 toast('Order Failed..check your balance and try again');
                 return;
             } else {
@@ -62,8 +62,14 @@ const BookDetail: React.FC = () => {
                         </Col>
                         <Col xs={24} sm={12} md={16} lg={18}>
                             <div>
-                                <Typography.Title level={2}>{book.title} <Typography.Paragraph color="danger"> Genre: {book.tags}</Typography.Paragraph >  </Typography.Title>
-                                <Typography.Title level={4}>{book.author}</Typography.Title>
+                                <Typography.Title level={2}>
+                                    {book.title}{' '}
+                                    <Typography.Paragraph color="danger">
+                                        {/* Genre: {book.tags.map((tag, index) => (
+                                            <span key={index}>{tag}{index !== book.tags.length - 1 && ', '}</span>
+                                        ))} */}
+                                    </Typography.Paragraph>
+                                </Typography.Title>                                <Typography.Title level={4}>{book.author}</Typography.Title>
                                 <Typography.Title level={3}>{`$${book.price}`}</Typography.Title>
                                 <Button type="primary" size="large" onClick={handleBuy}>
                                     Buy Now

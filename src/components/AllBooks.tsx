@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Col, Divider, Row, Alert, Input } from 'antd';
 import Title from 'antd/es/typography/Title';
 import BookCard from './Cards/BookCard';
@@ -9,7 +9,46 @@ import { Loader } from '.';
 const AllBooks: React.FC = () => {
     const { data: allBooks, isFetching, isError } = useGetAllBooksQuery();
     const [filter, setFilter] = useState<string>('');
+    const [visibleBooks, setVisibleBooks] = useState<Book[]>([]);
+    const containerRef = useRef<HTMLDivElement | null>(null);
 
+    useEffect(() => {
+        if (allBooks) {
+            setVisibleBooks(allBooks.slice(0, 10)); // Initial display limit
+        }
+    }, [allBooks]);
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+        const target = entries[0];
+        if (target.isIntersecting) {
+            const currentVisibleCount = visibleBooks.length;
+            if (allBooks) {
+                const newVisibleBooks = allBooks.slice(0, currentVisibleCount + 10);
+                setVisibleBooks(newVisibleBooks);
+            }
+
+        }
+    };
+
+    useEffect(() => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.8, // target display limit
+        };
+
+        const observer = new IntersectionObserver(handleIntersection, observerOptions);
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => {
+            if (containerRef.current) {
+                observer.unobserve(containerRef.current);
+            }
+        };
+    }, [visibleBooks]);
 
     if (isFetching) {
         return <Loader />;
@@ -18,13 +57,10 @@ const AllBooks: React.FC = () => {
     if (isError) {
         return <Alert message="Error loading books" type="error" />;
     }
-    if (!allBooks) {
-        return <Alert message="No books found" type="info" />;
-    }
-    const filteredBooks = allBooks.filter((book: Book) =>
+
+    const filteredBooks = visibleBooks.filter((book: Book) =>
         book.title.toLowerCase().includes(filter.toLowerCase()) ||
         book.author.toLowerCase().includes(filter.toLowerCase())
-
     );
 
     return (
