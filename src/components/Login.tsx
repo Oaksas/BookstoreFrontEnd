@@ -1,33 +1,45 @@
 import React from 'react';
-import { Button, Checkbox, Form, Input, Typography } from 'antd';
+import { useLoginUserMutation } from '../services/usersApi';
+import toast from 'react-simple-toasts';
 
-const onFinish = (values: any) => {
-    console.log('Success:', values);
-};
+const UserLogin: React.FC = () => {
+    const [loginUser] = useLoginUserMutation();
 
-const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-};
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const username = e.currentTarget.username.value;
+        const password = e.currentTarget.password.value;
 
-type FieldType = {
-    username?: string;
-    password?: string;
-    remember?: string;
-};
+        try {
+            const result = await loginUser({ username, password });
+            console.log(result)
+            if (result?.error) {
+                toast(result.error.data);
+                return;
+            }
+            localStorage.setItem('TOKEN', JSON.stringify({ username, password }));
 
-const UserLogin: React.FC = () => (
-    <>
+            toast('Login Successful');
+        } catch (error) {
+            toast('Login Failed');
+            console.error('Login failed:', error);
+        }
+    };
+
+    return (
         <div className="container">
             <div className="wrapper">
-                <div className="title"><span>Login Form</span></div>
-                <form action="#">
+                <div className="title">
+                    <span>Login Form</span>
+                </div>
+                <form onSubmit={handleLogin}>
                     <div className="row">
                         <i className="fas fa-user"></i>
-                        <input type="text" placeholder="Email or Phone" required />
+                        <input type="text" placeholder="Username" required name="username" />
                     </div>
                     <div className="row">
                         <i className="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" required />
+                        <input type="password" placeholder="Password" required name="password" />
                     </div>
                     <div className="row button">
                         <input type="submit" value="Login" />
@@ -35,8 +47,7 @@ const UserLogin: React.FC = () => (
                 </form>
             </div>
         </div>
-    </>
-
-);
+    );
+};
 
 export default UserLogin;
