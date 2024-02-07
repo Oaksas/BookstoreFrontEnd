@@ -5,7 +5,11 @@ export const bookAPI = createApi({
     reducerPath: "bookAPI",
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000" }),
     endpoints: (builder) => ({
-        getBooks: builder.query<any, void>({
+        getBookById: builder.query<any, number>({
+            query: (id) => `books/${id}`,
+        }),
+
+        getAllBooks: builder.query<any, void>({
             query: () => "books",
         }),
         createBook: builder.mutation<any, Partial<Book>>({
@@ -15,7 +19,6 @@ export const bookAPI = createApi({
                 body: newBook,
             }),
         }),
-
         updateBook: builder.mutation<any, Partial<Book>>({
             query: (book) => ({
                 url: `books/${book.id}`,
@@ -30,9 +33,8 @@ export const bookAPI = createApi({
                 method: "DELETE",
             }),
         }),
-
-
     }),
 });
 
-export const { useGetBooksQuery, useCreateBookMutation } = bookAPI;
+export const { useGetBookByIdQuery, useGetAllBooksQuery, useCreateBookMutation, useUpdateBookMutation, useDeleteBookMutation } = bookAPI;
+
