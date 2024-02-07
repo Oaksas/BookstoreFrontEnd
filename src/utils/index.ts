@@ -14,4 +14,7 @@ export const getMeUser = () => {
     }
 }
 
+export const BookCoverImage = () => {
+    return "https://images-na.ssl-images-amazon.com/images/I/51Ga5GuElyL._AC_SX184_.jpg"
+}
 

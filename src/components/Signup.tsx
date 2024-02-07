@@ -34,7 +34,6 @@ const UserSignup: React.FC = () => {
 
         } catch (error) {
             toast('Signup Failed');
-            console.error('Signup failed:', error);
         }
     };
 

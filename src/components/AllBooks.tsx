@@ -50,13 +50,13 @@ const AllBooks: React.FC = () => {
         };
     }, [visibleBooks]);
 
-    const handleTagFilter = useCallback(((tag: string) => {
+    const handleTagFilter = ((tag: string) => {
         if (tagFilters.includes(tag)) {
             setTagFilters(tagFilters.filter((filter) => filter !== tag));
         } else {
             setTagFilters([...tagFilters, tag]);
         }
-    }), tagFilters);
+    });
     if (isFetching) {
         return <Loader />;
     }
@@ -65,8 +65,17 @@ const AllBooks: React.FC = () => {
         return <Alert message="Error loading books" type="error" />;
     }
 
-    const tagButtons = ['Fiction', 'Non-Fiction', 'Science Fiction', 'Romance'];
+    const tagButtons: string[] = [];
 
+    if (allBooks) {
+        allBooks.forEach((book) => {
+            book.tags.forEach((tag) => {
+                if (!tagButtons.includes(tag)) {
+                    tagButtons.push(tag);
+                }
+            });
+        });
+    }
 
     const renderTagButtons = () => (
         <div style={{ margin: '16px' }}>

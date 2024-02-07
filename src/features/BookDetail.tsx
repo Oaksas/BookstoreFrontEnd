@@ -7,7 +7,7 @@ import { useCreateOrderMutation } from '../services/orderApi';
 import toast from 'react-simple-toasts';
 import { toastConfig } from 'react-simple-toasts';
 import 'react-simple-toasts/dist/theme/dark.css';
-import { getMeUser, isAuthenticated } from '../utils';
+import { BookCoverImage, getMeUser, isAuthenticated } from '../utils';
 import { Rating } from '@smastrom/react-rating'
 
 import '@smastrom/react-rating/style.css'
@@ -47,8 +47,6 @@ const BookDetail: React.FC = () => {
                         customerId: id,
                         quantity: 1,
                     });
-                    console.log(user, result)
-
                     if (result.error) {
                         toast('Order Failed..check your balance and try again');
                         return;
@@ -69,7 +67,7 @@ const BookDetail: React.FC = () => {
                 <Content>
                     <Row gutter={[16, 16]} className='row' >
                         <Col xs={24} sm={12} md={8} lg={6}>
-                            <img src='https://images-na.ssl-images-amazon.com/images/I/51Ga5GuElyL._AC_SX184_.jpg' alt={book.title} style={{ width: '100%', height: 'auto' }} />
+                            <img src={BookCoverImage()} alt={book.title} style={{ width: '100%', height: 'auto' }} />
                         </Col>
                         <Col xs={24} sm={12} md={16} lg={18}>
                             <div>

@@ -1,10 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-type UserTag = { type: 'User'; id: number };
-
 export const ordersAPI = createApi({
     reducerPath: 'ordersAPI',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api' }), // Replace with your API base URL
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api' }),
     endpoints: (builder) => ({
         createOrder: builder.mutation<any, { customerId: number; bookId: number; quantity: number }>({
             query: (newOrder) => ({

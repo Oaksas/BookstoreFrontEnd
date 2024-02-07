@@ -6,6 +6,6 @@ export default interface Book {
     author: string;
     price: number;
     rating: number;
-    tags: [string]
+    tags: string[]
 }
 

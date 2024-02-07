@@ -4,7 +4,7 @@ import { Book } from '../../models';
 import { Link } from 'react-router-dom';
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
-
+import { BookCoverImage } from '../../utils';
 
 const { Meta } = Card;
 
@@ -20,7 +20,7 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
                     className='cards'
                     hoverable
                     title={`$${book.price}`}
-                    cover={<img alt={book.title} src="https://images-na.ssl-images-amazon.com/images/I/51Ga5GuElyL._AC_SX184_.jpg" />}
+                    cover={<img alt={book.title} src={BookCoverImage()} />}
                 >
                     <Meta
                         title={book.title}
