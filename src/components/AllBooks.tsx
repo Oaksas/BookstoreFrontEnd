@@ -97,7 +97,8 @@ const AllBooks: React.FC = () => {
     );
 
     const filterBooksByTags = (books: Book[], tags: string[]) => {
-        return books.filter((book) => tags.every((tag) => book.tags.includes(tag)));
+        if (!tags.length) return books;
+        return books.filter((book) => tags.some((tag) => book.tags.includes(tag)));
     };
 
     const filteredBooksByTags = filterBooksByTags(visibleBooks, tagFilters);
