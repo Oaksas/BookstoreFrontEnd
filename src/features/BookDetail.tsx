@@ -8,7 +8,9 @@ import toast from 'react-simple-toasts';
 import { toastConfig } from 'react-simple-toasts';
 import 'react-simple-toasts/dist/theme/dark.css'; // choose your theme
 import { isAuthenticated } from '../utils';
+import { Rating } from '@smastrom/react-rating'
 
+import '@smastrom/react-rating/style.css'
 toastConfig({ theme: 'dark' }); // configure global toast settings, like theme
 
 const { Content } = Layout;
@@ -62,15 +64,22 @@ const BookDetail: React.FC = () => {
                         </Col>
                         <Col xs={24} sm={12} md={16} lg={18}>
                             <div>
-                                <Typography.Title level={2}>
+                                <Typography.Title level={1}>
                                     {book.title}{' '}
-                                    <Typography.Paragraph color="danger">
-                                        {/* Genre: {book.tags.map((tag, index) => (
+                                    <Typography.Paragraph type="danger" >
+                                        {book.tags.map((tag, index) => (
                                             <span key={index}>{tag}{index !== book.tags.length - 1 && ', '}</span>
-                                        ))} */}
+                                        ))}
+                                        <Rating
+                                            style={{ maxWidth: 180 }}
+                                            value={book.rating}
+                                            readOnly
+                                        />
                                     </Typography.Paragraph>
-                                </Typography.Title>                                <Typography.Title level={4}>{book.author}</Typography.Title>
-                                <Typography.Title level={3}>{`$${book.price}`}</Typography.Title>
+
+                                </Typography.Title>
+                                <Typography.Title level={4}>{book.author}</Typography.Title>
+                                <Typography.Title level={3} type='success'>{`$${book.price}`}</Typography.Title>
                                 <Button type="primary" size="large" onClick={handleBuy}>
                                     Buy Now
                                 </Button>
