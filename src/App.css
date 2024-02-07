@@ -168,7 +168,8 @@ form .row input::placeholder {
   color: #999;
 }
 
-.wrapper form .row i {
+
+.loginIcons {
   position: absolute;
   width: 47px;
   height: 100%;

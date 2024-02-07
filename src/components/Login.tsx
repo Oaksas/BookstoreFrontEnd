@@ -2,6 +2,7 @@ import React from 'react';
 import { useLoginUserMutation } from '../services/usersApi';
 import toast from 'react-simple-toasts';
 import { Link, useNavigate } from 'react-router-dom';
+import { UserOutlined, KeyOutlined } from '@ant-design/icons';
 
 const UserLogin: React.FC = () => {
     const [loginUser] = useLoginUserMutation();
@@ -15,7 +16,7 @@ const UserLogin: React.FC = () => {
         try {
             const result = await loginUser({ username, password });
             if ('error' in result) {
-                toast(result.error.data);
+                toast((result.error as any)?.data);
                 return;
             }
 
@@ -46,20 +47,19 @@ const UserLogin: React.FC = () => {
                 </div>
                 <form onSubmit={handleLogin}>
                     <div className="row">
-                        <i className="fas fa-user"></i>
+                        <UserOutlined className='loginIcons' />
                         <input type="text" placeholder="Username" required name="username" />
                     </div>
                     <div className="row">
-                        <i className="fas fa-lock"></i>
+                        <KeyOutlined className='loginIcons' />
                         <input type="password" placeholder="Password" required name="password" />
                     </div>
                     <div className="row button">
                         <input type="submit" value="Login" />
                     </div>
 
-                    <div className='row'>
+                    <div className=''>
                         Don't have an account ? <Link to='/signup'>Signup</Link>
-
                     </div>
 
                 </form>

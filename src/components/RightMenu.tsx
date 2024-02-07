@@ -2,7 +2,7 @@ import { Menu, Avatar } from "antd";
 import { UserOutlined, CodeOutlined, LogoutOutlined, DollarOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { isAuthenticated } from "../utils";
+import { getMeUser, isAuthenticated } from "../utils";
 
 interface RightMenuProps {
   mode: "horizontal" | "inline";
@@ -15,10 +15,9 @@ const RightMenu: React.FC<RightMenuProps> = ({ mode }) => {
   useEffect(() => {
     const fetchUser = () => {
       if (isAuthenticated()) {
-        const userString = localStorage.getItem("TOKEN");
-        if (userString) {
-          const parsedUser = JSON.parse(userString);
-          setUser(parsedUser);
+        const user = getMeUser()
+        if (user) {
+          setUser(user);
         }
       }
     };

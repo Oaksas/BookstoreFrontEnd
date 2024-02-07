@@ -2,6 +2,7 @@ import React from 'react';
 import { useCreateUserMutation } from '../services/usersApi';
 import toast from 'react-simple-toasts';
 import { useNavigate } from 'react-router-dom';
+import { UserOutlined, KeyOutlined } from '@ant-design/icons';
 
 const UserSignup: React.FC = () => {
     const [signupUser] = useCreateUserMutation();
@@ -16,7 +17,7 @@ const UserSignup: React.FC = () => {
             const result = await signupUser({ username, password });
 
             if ('error' in result) {
-                toast(result.error.data);
+                toast((result.error as any)?.data);
                 return;
             }
 
@@ -46,11 +47,11 @@ const UserSignup: React.FC = () => {
                 </div>
                 <form onSubmit={handleSignup}>
                     <div className="row">
-                        <i className="fas fa-user"></i>
+                        <UserOutlined className='loginIcons' />
                         <input type="text" placeholder="Username" required name="username" />
                     </div>
                     <div className="row">
-                        <i className="fas fa-lock"></i>
+                        <KeyOutlined className='loginIcons' />
                         <input type="password" placeholder="Password" required name="password" />
                     </div>
                     <div className="row button">
