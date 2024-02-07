@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Col, Divider, Row, Alert, Input, Button } from 'antd';
 import Title from 'antd/es/typography/Title';
 import BookCard from './Cards/BookCard';
@@ -50,6 +50,13 @@ const AllBooks: React.FC = () => {
         };
     }, [visibleBooks]);
 
+    const handleTagFilter = useCallback(((tag: string) => {
+        if (tagFilters.includes(tag)) {
+            setTagFilters(tagFilters.filter((filter) => filter !== tag));
+        } else {
+            setTagFilters([...tagFilters, tag]);
+        }
+    }), tagFilters);
     if (isFetching) {
         return <Loader />;
     }
@@ -60,13 +67,6 @@ const AllBooks: React.FC = () => {
 
     const tagButtons = ['Fiction', 'Non-Fiction', 'Science Fiction', 'Romance'];
 
-    const handleTagFilter = (tag: string) => {
-        if (tagFilters.includes(tag)) {
-            setTagFilters(tagFilters.filter((filter) => filter !== tag));
-        } else {
-            setTagFilters([...tagFilters, tag]);
-        }
-    };
 
     const renderTagButtons = () => (
         <div style={{ margin: '16px' }}>
@@ -126,4 +126,4 @@ const AllBooks: React.FC = () => {
     );
 };
 
-export default AllBooks;
+export default React.memo(AllBooks);

@@ -45,4 +45,4 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
     );
 };
 
-export default BookCard;
+export default React.memo(BookCard);
