@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { cryptoNewsAPI } from "../services/cryptoNewsAPI";
-import { cryptoAPI } from "../services/cryptoAPI";
-export default configureStore({
-    reducer: { [cryptoAPI.reducerPath]: cryptoAPI.reducer, [cryptoNewsAPI.reducerPath]: cryptoNewsAPI.reducer },
+import { bookAPI } from "../services/bookStoreApi";
+
+export const store = configureStore({
+    reducer: {
+        [bookAPI.reducerPath]: bookAPI.reducer,
+    },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(cryptoAPI.middleware, cryptoNewsAPI.middleware
-        ),
+        getDefaultMiddleware().concat(bookAPI.middleware),
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
