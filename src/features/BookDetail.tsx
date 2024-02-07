@@ -58,11 +58,11 @@ const BookDetail: React.FC = () => {
                 <Content>
                     <Row gutter={[16, 16]}>
                         <Col xs={24} sm={12} md={8} lg={6}>
-                            <img src='https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png' alt={book.title} style={{ width: '100%', height: 'auto' }} />
+                            <img src='https://images-na.ssl-images-amazon.com/images/I/51Ga5GuElyL._AC_SX184_.jpg' alt={book.title} style={{ width: '100%', height: 'auto' }} />
                         </Col>
                         <Col xs={24} sm={12} md={16} lg={18}>
                             <div>
-                                <Typography.Title level={2}>{book.title}</Typography.Title>
+                                <Typography.Title level={2}>{book.title} <Typography.Paragraph color="danger"> Genre: {book.tags}</Typography.Paragraph >  </Typography.Title>
                                 <Typography.Title level={4}>{book.author}</Typography.Title>
                                 <Typography.Title level={3}>{`$${book.price}`}</Typography.Title>
                                 <Button type="primary" size="large" onClick={handleBuy}>
