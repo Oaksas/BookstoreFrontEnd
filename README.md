@@ -1,30 +1,67 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+```markdown
+# Project Name
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is a frontend application for a bookstore. It allows users to view book details, place orders, and manage their orders.
 
-## Expanding the ESLint configuration
+## Table of Contents
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Oaksas/BookstoreFrontEnd
+   ```
+
+2. Navigate to the project folder:
+
+   ```bash 
+   cd BookstoreFrontEnd
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   yarn install
+   ```
+
+## Usage
+
+
+```bash
+yarn run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Visit [http://localhost:5173](http://localhost:5173) in your browser.
+
+## Features
+
+- Login User
+- Logout User
+- Get All Books
+- Get All Orders of logged in User
+- Buy Book
+- Validations
+...
+
+## Technologies Used
+
+- React: [https://reactjs.org/](https://reactjs.org/)
+- Ant Design: [https://ant.design/](https://ant.design/)
+- Redux-toolkit
+
+## License
+
+[MIT License](LICENSE)
+
+```
