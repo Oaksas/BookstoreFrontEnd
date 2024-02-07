@@ -1,3 +1,4 @@
 import Navbar from "./Navbar";
 import AllBooks from "./AllBooks";
-export { Navbar, AllBooks }
+import Loader from "./Loader";
+export { Navbar, AllBooks, Loader }

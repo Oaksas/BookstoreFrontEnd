@@ -1,16 +1,32 @@
-import React from 'react'
-import { Card } from 'antd'
+import React from 'react';
+import { Badge, Card } from 'antd';
+import { Book } from '../../models';
+import { Link } from 'react-router-dom';
+
 const { Meta } = Card;
 
-const BookCard: React.FC = () => {
-    return (
-        <Card
-            hoverable
-            style={{ width: 240 }}
-            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-        >
-            <Meta title="Europe Street beat" description="www.instagram.com" />
-        </Card>)
+interface BookCardProps {
+    book: Book;
 }
 
-export default BookCard
+const BookCard: React.FC<BookCardProps> = ({ book }) => {
+    return (
+        <div className="book-card-container">
+            <Link to={`/books/${book.id}`}>
+
+                <Card
+                    className='cards'
+                    hoverable
+                    title={'$' + book.price}
+                    cover={<img alt={book.title} src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                >
+
+                    <Meta title={book.title} description={book.author} />
+
+                </Card>
+            </Link>
+        </div >
+    );
+};
+
+export default BookCard;
