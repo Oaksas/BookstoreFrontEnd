@@ -1,5 +1,6 @@
 import { Menu, Avatar } from "antd";
 import { UserOutlined, CodeOutlined, LogoutOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 interface RightMenuProps {
   mode: "horizontal" | "inline";
@@ -16,11 +17,11 @@ const RightMenu: React.FC<RightMenuProps> = ({ mode }) => {
           </>
         }
       >
-        <Menu.Item key="project">
-          <CodeOutlined /> ALL BOOKS
+        <Menu.Item key="allbooks">
+          <CodeOutlined /> <Link to="/">All Books</Link>
         </Menu.Item>
-        <Menu.Item key="about-us">
-          <UserOutlined /> MY ORDERS
+        <Menu.Item key="myorders">
+          <UserOutlined />  <Link to="/myOrders">My Orders</Link>
         </Menu.Item>
         <Menu.Item key="log-out">
           <LogoutOutlined /> Logout
