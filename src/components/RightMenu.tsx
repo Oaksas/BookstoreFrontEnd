@@ -1,12 +1,22 @@
 import { Menu, Avatar } from "antd";
 import { UserOutlined, CodeOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { isAuthenticated } from "../utils";
 
 interface RightMenuProps {
   mode: "horizontal" | "inline";
 }
 
 const RightMenu: React.FC<RightMenuProps> = ({ mode }) => {
+  const [isLoggedIn, setLoggedIn] = useState(isAuthenticated());
+
+  const handleLogout = () => {
+    // Replace this with your actual logout logic
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+  };
+
   return (
     <Menu mode={mode}>
       <Menu.SubMenu
