@@ -10,7 +10,7 @@ interface RightMenuProps {
 
 const RightMenu: React.FC<RightMenuProps> = ({ mode }) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({ username: "", points: 0 });
+  const [user, setUser] = useState({ username: null, points: 0 });
 
   useEffect(() => {
     const fetchUser = () => {
@@ -23,46 +23,47 @@ const RightMenu: React.FC<RightMenuProps> = ({ mode }) => {
     };
 
     fetchUser();
-  }, []); // Empty dependency array ensures useEffect runs only once on mount
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("TOKEN");
     navigate("/login");
   };
 
+  console.log(user)
   return (
-    <Menu mode={mode}>
-      <Menu.SubMenu
-        title={
-          <>
-            <Avatar icon={<UserOutlined />} />
-            <span className="username">{user && user.points} Points</span>
-            <span className="username">{user && user.username}</span>
-          </>
-        }
-      >
-        <Menu.Item key="allbooks">
-          <CodeOutlined /> <Link to="/">All Books</Link>
-        </Menu.Item>
-        <Menu.Item key="myorders">
-          <UserOutlined /> <Link to="/myOrders">My Orders</Link>
-        </Menu.Item>
-        <Menu.Item key="log-out" onClick={handleLogout}>
-          <LogoutOutlined /> Logout
-        </Menu.Item>
+    <>
+      {user.username ? (
+        <Menu mode={mode}>
+          <Menu.SubMenu icon={<Avatar icon={<UserOutlined />} />}
+          >
+            <Menu.Item key="allbooks">
+              <CodeOutlined /> <Link to="/">All Books</Link>
+            </Menu.Item>
+            <Menu.Item key="myorders">
+              <UserOutlined /> <Link to="/myOrders">My Orders</Link>
+            </Menu.Item>
+            <Menu.Item key="log-out" onClick={handleLogout}>
+              <LogoutOutlined /> Logout
+            </Menu.Item>
 
-        <Menu.Item key="points" >
-          < DollarOutlined /> {user && user.points} Points
+            <Menu.Item key="points" >
+              < DollarOutlined /> {user.username && user.points.toFixed(2)} Points
 
-        </Menu.Item>
-        <Menu.Item key="username" >
-          <UserOutlined /> {user && user.username}
+            </Menu.Item>
+            <Menu.Item key="username" >
+              <UserOutlined /> {user.username && user.username}
 
-        </Menu.Item>
+            </Menu.Item>
 
-      </Menu.SubMenu>
-    </Menu>
-  );
-};
+          </Menu.SubMenu>
+        </Menu>
+      ) : (
+        <div></div>
+      )}
+    </>
+
+  )
+}
 
 export default RightMenu;

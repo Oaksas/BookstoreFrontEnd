@@ -31,7 +31,7 @@ const UserLogin: React.FC = () => {
             toast('Login Successful');
 
 
-            navigate('/'); // Step 3
+            window.location.replace('/')
 
         } catch (error) {
             toast('Login Failed');

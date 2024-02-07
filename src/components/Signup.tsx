@@ -15,8 +15,8 @@ const UserSignup: React.FC = () => {
 
         try {
             const result = await signupUser({ username, password });
-
             if ('error' in result) {
+
                 toast((result.error as any)?.data);
                 return;
             }
@@ -31,7 +31,7 @@ const UserSignup: React.FC = () => {
             toast('Signup Successful');
 
 
-            navigate('/login'); // Step 3
+            navigate('/login');
 
         } catch (error) {
             toast('Signup Failed');
